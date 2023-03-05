@@ -1,36 +1,23 @@
 let TIMEOUT = 5000;
-let LEVEL = 1;
-let clicks = 0;
-let totalClicks = 0;
+let LEVEL = 1; //уровень
+let clicks = 0; //количество кликов за раунд
+let totalClicks = localStorage.getItem('ttl'); //общее количество кликов
 const GAMEOVER = "Game Over";
 
+const shop = document.querySelector('#shop');
 const level = document.querySelector('#level');
 const display = document.querySelector('#display');
 const button = document.querySelector('#button');
 const counter = document.querySelector('#counter');
 const total = document.querySelector('#total');
 
+const mainDiv = document.querySelector('#main');
+
+const mainElements = [];
+mainElements.push(level, display, button, counter, total);
+
 button.onclick = start;
-
-// function start() {
-//   const startTime = Date.now();
-
-//   display.textContent = formatTime(TIMEOUT);
-//   button.onclick = () => counter.textContent = clicks++;
-
-//   const interval = setInterval(() => {
-//     const delta = Date.now() - startTime;
-//     display.textContent = formatTime(TIMEOUT) - delta;
-//   }, 100);
-
-//   setTimeout(() => {
-//     button.onclick = null;
-//     display.textContent = 'Game Over';
-
-//     clearInterval(interval);
-//     clearTimeout(timeout);
-//   }, TIMEOUT);
-// }
+shop.onclick = showShop;
 
 function formatTime(ms) {
   return Number.parseFloat(ms / 1000).toFixed(2);
@@ -45,6 +32,7 @@ function start() {
   button.onclick = () => {
   counter.textContent = clicks++;
   total.textContent = "TOTAL " + totalClicks++;
+  localStorage.setItem('ttl', totalClicks);
   }
 
   const interval = setInterval(() => {
@@ -62,4 +50,26 @@ function start() {
 
   clicks = 0;
   LEVEL++;
+}
+
+function showShop() {
+  if(shop.textContent === "Shop")
+  {
+  // for(let i = 0; i < mainElements.length; i++)
+  // {
+  //   mainElements[i].style.display = "none";
+  // }
+  shop.textContent = "Back";
+  mainDiv.style.display = "none";
+  }
+
+  else if(shop.textContent === "Back")
+  {
+  // for(let i = 0; i < mainElements.length; i++)
+  // {
+  //   mainElements[i].style.display = "block";
+  // }
+  mainDiv.style.display = "block";
+  shop.textContent = "Shop";
+  }
 }
