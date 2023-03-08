@@ -2,8 +2,10 @@ let TIMEOUT = 5000;
 let LEVEL = 1; //уровень
 let clicks = 0; //количество кликов за раунд
 let totalClicks = localStorage.getItem('ttl'); //общее количество кликов
+let isShop = false;
 const GAMEOVER = "Game Over";
 
+// main buttons
 const shop = document.querySelector('#shop');
 const level = document.querySelector('#level');
 const display = document.querySelector('#display');
@@ -13,8 +15,14 @@ const total = document.querySelector('#total');
 
 const mainDiv = document.querySelector('#main');
 
-const mainElements = [];
-mainElements.push(level, display, button, counter, total);
+// shop buttons
+
+const shopDiv = document.querySelector('#shopDiv');
+shopDiv.style.display = "none";
+
+
+// const mainElements = [];
+// mainElements.push(level, display, button, counter, total);
 
 button.onclick = start;
 shop.onclick = showShop;
@@ -24,6 +32,10 @@ function formatTime(ms) {
 }
 
 function start() {
+  if (isShop)
+  {
+    return;
+  }
   const startTime = Date.now();
 
   level.textContent = "Level " + LEVEL;
@@ -53,23 +65,19 @@ function start() {
 }
 
 function showShop() {
-  if(shop.textContent === "Shop")
+  if(!isShop)
   {
-  // for(let i = 0; i < mainElements.length; i++)
-  // {
-  //   mainElements[i].style.display = "none";
-  // }
   shop.textContent = "Back";
   mainDiv.style.display = "none";
+  shopDiv.style.display = "flex";
+  isShop = !isShop;
   }
 
-  else if(shop.textContent === "Back")
+  else if(isShop)
   {
-  // for(let i = 0; i < mainElements.length; i++)
-  // {
-  //   mainElements[i].style.display = "block";
-  // }
-  mainDiv.style.display = "block";
   shop.textContent = "Shop";
+  mainDiv.style.display = "flex";
+  shopDiv.style.display = "none";
+  isShop = !isShop;
   }
 }
