@@ -3,7 +3,23 @@ html {
     font-size: 2rem;
 }
 
+/* body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    color: black;
+} */
+
 body {
+    display: flex;
+}
+
+.frame {
+    z-index: 0;
     margin: 0;
     padding: 0;
     display: flex;
@@ -24,7 +40,7 @@ body {
 .button {
     --color: white;
 
-    position: relative;
+    /* position: relative; */
     font-size: .75rem;
     width: 200px;
     height: 75px;

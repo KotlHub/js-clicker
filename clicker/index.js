@@ -10,6 +10,7 @@ const shop = document.querySelector('#shop');
 const level = document.querySelector('#level');
 const display = document.querySelector('#display');
 const button = document.querySelector('#button');
+const newButton = document.querySelector('#newButton');
 const counter = document.querySelector('#counter');
 const total = document.querySelector('#total');
 
@@ -53,15 +54,21 @@ function start() {
   }, 100);
 
   const timeout = setTimeout(() => {
+    newButton.onclick = start;
     button.onclick = start;
     display.textContent = GAMEOVER;
 
     clearInterval(interval);
     clearTimeout(timeout);
   }, TIMEOUT);
+  if(LEVEL++ && LEVEL >= 5)
+  {
+    newButton.style.right = getRandomInt(80) + "%";
+    newButton.style.top = getRandomInt(80) + "%";
+  }
 
   clicks = 0;
-  LEVEL++;
+  //LEVEL++;
 }
 
 function showShop() {
@@ -80,4 +87,8 @@ function showShop() {
   shopDiv.style.display = "none";
   isShop = !isShop;
   }
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
