@@ -25,6 +25,9 @@ shopDiv.style.display = "none";
 // const mainElements = [];
 // mainElements.push(level, display, button, counter, total);
 
+console.log("hui");
+newButton.style.display = "none";
+
 button.onclick = start;
 shop.onclick = showShop;
 
@@ -42,7 +45,14 @@ function start() {
   level.textContent = "Level " + LEVEL;
 
   display.textContent = formatTime(TIMEOUT);
+
   button.onclick = () => {
+  counter.textContent = clicks++;
+  total.textContent = "TOTAL " + totalClicks++;
+  localStorage.setItem('ttl', totalClicks);
+  }
+
+  newButton.onclick = () => {
   counter.textContent = clicks++;
   total.textContent = "TOTAL " + totalClicks++;
   localStorage.setItem('ttl', totalClicks);
@@ -63,6 +73,8 @@ function start() {
   }, TIMEOUT);
   if(LEVEL++ && LEVEL >= 5)
   {
+    button.style.display = "none";
+    newButton.style.display = "block";
     newButton.style.right = getRandomInt(80) + "%";
     newButton.style.top = getRandomInt(80) + "%";
   }
