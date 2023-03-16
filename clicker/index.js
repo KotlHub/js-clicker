@@ -1,10 +1,11 @@
-let TIMEOUT = 5000;
+let TIMEOUT = 2000;
 let LEVEL = 1; //уровень
 let clicks = 0; //количество кликов за раунд
 let totalClicks = localStorage.getItem('ttl'); //общее количество кликов
 let buttonSkin = localStorage.getItem('color');
 let isShop = false;
-const GAMEOVER = "Game Over";
+let hp = 100;
+const GAMEOVER = "Next Level";
 
 // main buttons
 const shop = document.querySelector('#shop');
@@ -14,12 +15,15 @@ const button = document.querySelector('#button');
 const newButton = document.querySelector('#newButton');
 const counter = document.querySelector('#counter');
 const total = document.querySelector('#total');
+const died = document.querySelector('#died');
+const again = document.querySelector('#again');
 
 const mainDiv = document.querySelector('#main');
 
 button.style.color = buttonSkin;
 newButton.style.color = buttonSkin;
 newButton.style.display = "none";
+died.style.display = "none";
 
 // shop buttons
 
@@ -28,9 +32,18 @@ const rButton = document.querySelector('#red');
 const gButton = document.querySelector('#green');
 const bButton = document.querySelector('#blue');
 
-rButton.onclick = buySkin(rButton.style.color)
-gButton.onclick = buySkin(gButton.style.color)
-bButton.onclick = buySkin(bButton.style.color)
+rButton.addEventListener("click",function()
+{
+    buySkin(rButton.style.color, 100);
+});
+gButton.addEventListener("click",function()
+{
+    buySkin(gButton.style.color, 200);
+});
+bButton.addEventListener("click",function()
+{
+    buySkin(bButton.style.color, 300);
+});
 
 shopDiv.style.display = "none";
 
@@ -41,6 +54,13 @@ shopDiv.style.display = "none";
 
 button.onclick = start;
 shop.onclick = showShop;
+
+again.onclick = () => {
+  mainDiv.style.display = "flex";
+  shop.style.display = "block";
+  shopDiv.style.display = "none";
+  died.style.display = "none";
+}
 
 function formatTime(ms) {
   return Number.parseFloat(ms / 1000).toFixed(2);
@@ -82,13 +102,30 @@ function start() {
     clearInterval(interval);
     clearTimeout(timeout);
   }, TIMEOUT);
+  
+
   if(LEVEL++ && LEVEL >= 5)
   {
+    if(clicks >= 10)
+    {
     button.style.display = "none";
     newButton.style.display = "block";
     newButton.style.right = getRandomInt(80) + "%";
     newButton.style.top = getRandomInt(80) + "%";
+    }
+    else
+    {
+      mainDiv.style.display = "none";
+      died.style.display = "flex";
+      newButton.style.display = "none";
+      shop.style.display = "none";
+
+      LEVEL = 1;
+      clicks = 0;
+
+    }
   }
+
 
   clicks = 0;
   //LEVEL++;
@@ -116,10 +153,12 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function buySkin(color)
+function buySkin(color, price)
 {
+  console.log(color);
   localStorage.setItem('color', color);
   button.style.color = color;
   newButton.style.color = color;
-
+  totalClicks -= price;
+  localStorage.setItem('ttl', totalClicks);
 }
