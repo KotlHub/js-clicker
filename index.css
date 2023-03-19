@@ -1,0 +1,77 @@
+html {
+    font-family: 'Press Start 2P';
+    font-size: 2rem;
+}
+
+/* body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    color: black;
+} */
+
+body {
+    display: flex;
+}
+
+.frame {
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 90vh;
+    background-color: white;
+    color: black;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    --color: white;
+
+    /* position: relative; */
+    font-size: .75rem;
+    width: 200px;
+    height: 75px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 32px;
+    border: 3px solid;
+    border-color: black;
+    background-size: cover;
+    cursor: pointer;
+    outline: black;
+    color: black;
+    font-family: 'Press Start 2P', monospace;
+    font-weight: bold;
+    background-color: var(--color);
+}
+
+#button:active {
+    top: 6px;
+}
+
+#level {
+    margin-bottom: 32px;
+}
+
+#total {
+    margin-top: 32px;
+}
+
+#level,
+#display,
+#counter {
+    height: 32px;
+}
