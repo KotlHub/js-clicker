@@ -34,15 +34,25 @@ const bButton = document.querySelector('#blue');
 
 rButton.addEventListener("click",function()
 {
+  if(totalClicks >= 100)
+  {
     buySkin(rButton.style.color, 100);
+  }
 });
 gButton.addEventListener("click",function()
 {
+  if(totalClicks >= 200)
+  {
     buySkin(gButton.style.color, 200);
+  }
+    
 });
 bButton.addEventListener("click",function()
 {
+  if(totalClicks >= 200)
+  {
     buySkin(bButton.style.color, 300);
+  }
 });
 
 shopDiv.style.display = "none";
