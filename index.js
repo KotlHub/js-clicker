@@ -34,24 +34,24 @@ const bButton = document.querySelector('#blue');
 
 rButton.addEventListener("click",function()
 {
-  if(totalClicks >= 100)
+  if(totalClicks >= 30)
   {
-    buySkin(rButton.style.color, 100);
+    buySkin(rButton.style.color, 30);
   }
 });
 gButton.addEventListener("click",function()
 {
-  if(totalClicks >= 200)
+  if(totalClicks >= 500)
   {
-    buySkin(gButton.style.color, 200);
+    buySkin(gButton.style.color, 500);
   }
     
 });
 bButton.addEventListener("click",function()
 {
-  if(totalClicks >= 200)
+  if(totalClicks >= 1000)
   {
-    buySkin(bButton.style.color, 300);
+    buySkin(bButton.style.color, 1000);
   }
 });
 
