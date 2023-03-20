@@ -1,4 +1,4 @@
-let TIMEOUT = 2000;
+let TIMEOUT = 5000;
 let LEVEL = 1; //уровень
 let clicks = 0; //количество кликов за раунд
 let totalClicks = localStorage.getItem('ttl'); //общее количество кликов
@@ -71,6 +71,7 @@ again.onclick = () => {
   shopDiv.style.display = "none";
   died.style.display = "none";
   button.style.display = "block";
+  newButton.textContent = "Click";
 }
 
 function formatTime(ms) {
@@ -92,13 +93,21 @@ function start() {
   counter.textContent = clicks++;
   total.textContent = "TOTAL " + totalClicks++;
   localStorage.setItem('ttl', totalClicks);
-  }
+  };
 
   newButton.onclick = () => {
   counter.textContent = clicks++;
   total.textContent = "TOTAL " + totalClicks++;
   localStorage.setItem('ttl', totalClicks);
-  }
+  };
+
+  document.addEventListener('keyup', function(event) {
+    if (event.code == ('Key' + newButton.textContent.toUpperCase())) {
+      counter.textContent = clicks++;
+      total.textContent = "TOTAL " + totalClicks++;
+      localStorage.setItem('ttl', totalClicks);
+    }
+  });
 
   const interval = setInterval(() => {
     const delta = Date.now() - startTime;
@@ -115,8 +124,14 @@ function start() {
   }, TIMEOUT);
   
 
-  if(LEVEL++ && LEVEL >= 5)
+  if(LEVEL++ && LEVEL >= 3)
   {
+
+    if(LEVEL >= 6)
+    {
+      newButton.textContent = randomString(1);
+    }
+
     if(clicks >= 10)
     {
     button.style.display = "none";
@@ -173,3 +188,10 @@ function buySkin(color, price)
   totalClicks -= price;
   localStorage.setItem('ttl', totalClicks);
 }
+
+function randomString(i) {
+  var rnd = '';
+  while (rnd.length < i) 
+      rnd += Math.random().toString(36).substring(2);
+  return rnd.substring(0, i);
+};
