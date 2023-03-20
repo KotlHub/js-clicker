@@ -70,6 +70,7 @@ again.onclick = () => {
   shop.style.display = "block";
   shopDiv.style.display = "none";
   died.style.display = "none";
+  button.style.display = "block";
 }
 
 function formatTime(ms) {
